@@ -15,7 +15,6 @@ defmodule Coinpayments.Mixfile do
   def application do
     [
       extra_applications: [:logger]
-
     ]
   end
 
@@ -25,7 +24,8 @@ defmodule Coinpayments.Mixfile do
 
   defp deps do
     [
-      {:tesla, "~> 0.10.0"}
+      {:tesla, "~> 0.10.0"},
+      {:mock, "~> 0.3.0", only: :test}
     ]
   end
 end
