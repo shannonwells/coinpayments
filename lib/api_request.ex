@@ -5,7 +5,7 @@ defmodule ApiRequest do
 
   def submit(command) do
     %{"version": "1",
-      "key": System.get_env("CPBK"),
+      "key": Application.get_env(:coinpayments, :api_key),
       "cmd": command }
     |> post
   end
@@ -13,7 +13,7 @@ defmodule ApiRequest do
   def submit(command, options) do
     options
     |> Map.merge(%{"version": "1",
-                   "key": System.get_env("CPBK"),
+                   "key": Application.get_env(:coinpayments, :api_key),
                    "cmd": command })
     |> post
   end
@@ -27,7 +27,7 @@ defmodule ApiRequest do
 
 
   defp hmac512(message) do
-    :crypto.hmac(:sha512, System.get_env("CPPK"), message)
+    :crypto.hmac(:sha512, Application.get_env(:coinpayments, :api_secret), message)
     |> Base.encode16
   end
 

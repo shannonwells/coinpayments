@@ -126,7 +126,7 @@ defmodule Coinpayments do
 
   @doc """
     __get_withdrawal_history/1__
-    required params: `%{amount: "NN.NN", currency: "XXX" }`
+    optional params: `limit, start, newer`
   """
   def get_withdrawal_history(params), do: ApiRequest.submit("get_withdrawal_history", params)
 
@@ -153,24 +153,40 @@ defmodule Coinpayments do
   def get_pbn_list, do: ApiRequest.submit("get_pbn_list")
 
   @doc """
-    get_pbn_info/1__
+    __get_pbn_info/1__
     required params: `%{pbntag: "$PbnName"}`
   """
   def get_pbn_info(%{pbntag: _} = params) do
     ApiRequest.submit("get_pbn_info",params)
   end
 
+  @doc """
+    __update_pbn_tag/1__
+    required params: `%{tag_id: "tagid"}`
+  """
   def update_pbn_tag(%{tagid: _} = params), do: ApiRequest.submit("update_pbn_tag", params)
 
   def update_pbn_tag(_), do: raise "tagid (tag's unique ID (obtained from 'get_pbn_list) is required."
 
+  @doc """
+    __claim_pbn_tag/1__
+    required params: `%{tag_id: "tagid", name: "name"}`
+  """
   def claim_pbn_tag(%{tagid: _, name: _} = params), do: ApiRequest.submit("claim_pbn_tag", params)
 
   def claim_pbn_tag(_) do
     raise "name (for the tag) and tagid (tag's unique ID (obtained from 'get_pbn_list) are required."
   end
 
+  @doc """
+    __rates/0__
+  """
   def rates, do: ApiRequest.submit("rates")
+
+  @doc """
+    __rates/0__
+    optional params: `short, accepted`
+  """
   def rates(params), do: ApiRequest.submit("rates", params)
 
 end
