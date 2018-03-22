@@ -9,9 +9,16 @@ defmodule Coinpayments.Mixfile do
       build_embedded: Mix.env == :prod,
       start_permanent: Mix.env == :prod,
       description: description(),
+      deps: deps(),
+
+      # docs
+      name: "coinpayments",
       source_url: "https://github.com/shannonwells/coinpayments_ex",
       package: package(),
-      deps: deps()
+      docs: [
+        main: "Coinpayments", # The main page in the docs
+        extras: ["README.md"]
+      ]
     ]
   end
 
